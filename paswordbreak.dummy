@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+    .container {
+      background: white;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #333;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #caption {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+      min-height: 24px;
+    }
+    .correct {
+      color: #28a745;
+    }
+    .incorrect {
+      color: #dc3545;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Step 1: Set Password -->
+    <div id="setupSection">
+      <h2>Set a Password</h2>
+      <input type="password" id="newPassword" placeholder="Create password">
+      <button onclick="setPassword()">Save Password</button>
+    </div>
+
+    <!-- Step 2: Check Password -->
+    <div id="checkSection" class="hidden">
+      <h2>Enter Password</h2>
+      <input type="password" id="guessPassword" placeholder="Enter password">
+      <button onclick="checkPassword()">Submit</button>
+      <p id="caption"></p>
+    </div>
+  </div>
+
+  <script>
+    let savedPassword = "";
+
+    function setPassword() {
+      const input = document.getElementById("newPassword").value;
+      if (input === "") {
+        alert("Please enter a password first.");
+        return;
+      }
+      savedPassword = input;
+      document.getElementById("setupSection").classList.add("hidden");
+      document.getElementById("checkSection").classList.remove("hidden");
+    }
+
+    function checkPassword() {
+      const guess = document.getElementById("guessPassword").value;
+      const caption = document.getElementById("caption");
+
+      if (guess === savedPassword) {
+        caption.textContent = "Correct";
+        caption.className = "correct";
+      } else {
+        caption.textContent = "Incorrect";
+        caption.className = "incorrect";
+      }
+    }
+  </script>
+
+</body>
+</html>
